@@ -13,21 +13,18 @@ const Home = () => {
   const [totalProject, setTotalProject] = useState(0);
   const [projects, setPtojects] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [id, setId] = useState("");
-
-  useEffect(() => {
-    if (userToken) {
-      const { id } = parseJwt(userToken);
-      setId(id);
-    }
-  }, [userToken]);
+  // const [id, setId] = useState("");
 
   useEffect(() => {
     setLoading(true);
+    // if (userToken) {
+    // const { id } = parseJwt(userToken);
+    // setId(id);
+    // }
     axios
       .post(
         `${baseUrl}/normal/dashboard`,
-        { id },
+        { id: parseJwt(userToken).id },
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -35,6 +32,7 @@ const Home = () => {
         }
       )
       .then((res) => {
+        console.log(res.data);
         setTotalProject(res.data.totalProject);
         setPtojects(res.data.projects);
       })
@@ -44,8 +42,10 @@ const Home = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [id, userToken]);
+  }, [userToken]);
 
+  console.log(projects);
+  // console.log(id);
   return (
     <>
       {loading && <Spinner />}
