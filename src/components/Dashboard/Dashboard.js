@@ -20,7 +20,7 @@ const Dashboard = ({ AnotherComponent }) => {
   return (
     <>
       <div className="flex bg-gray-700">
-        <div className="md:flex w-2/5 md:w-1/6 h-screen bg-gray-700 hidden">
+        <div className="md:flex w-2/5 md:w-1/6 h-screen bg-gray-700">
           <div className="mx-auto px-5 py-4">
             <h1 className="mb-5 ml-3 cursor-pointer duration-150">
               <img
