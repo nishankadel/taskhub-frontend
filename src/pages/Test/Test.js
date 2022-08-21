@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import baseUrl from "../../baseUrl";
 
 const Test = () => {
   const [data, setData] = React.useState([]);
   useEffect(() => {
     axios
-      .get("https://dummyjson.com/products")
+      .get(`${baseUrl}`)
       .then((res) => {
         setData(res.data.products);
       })
