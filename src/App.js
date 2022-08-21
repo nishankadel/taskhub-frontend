@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Profile from "./pages/Profile/Profile";
 import SingleProject from "./pages/Projects/SingleProject";
+import EmailVerification from "./pages/EmailVerification/EmailVerification";
 
 const App = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
@@ -46,6 +47,10 @@ const App = () => {
           <Route path="/" element={<Dashboard AnotherComponent={<Home />} />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
+          <Route
+            path="/auth/email-verification"
+            element={<EmailVerification />}
+          />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>

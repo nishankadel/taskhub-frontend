@@ -43,7 +43,13 @@ const Register = () => {
         .then((res) => {
           if (res.data.success === true) {
             toast.success(res.data.message);
-            navigate("/auth/login");
+
+            localStorage.setItem(
+              "TH:user-profile",
+              JSON.stringify(res.data.user)
+            );
+
+            navigate("/auth/email-verification");
           } else {
             toast.error(res.data.message);
             navigate("/auth/register");
