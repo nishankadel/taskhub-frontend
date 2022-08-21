@@ -13,8 +13,15 @@ const Home = () => {
   const [totalProject, setTotalProject] = useState(0);
   const [projects, setPtojects] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [id, setId] = useState("");
 
-  const { id } = parseJwt(userToken);
+  useEffect(() => {
+    if (userToken) {
+      const { id } = parseJwt(userToken);
+      setId(id);
+    }
+  }, [userToken]);
+
   useEffect(() => {
     setLoading(true);
     axios
