@@ -1,9 +1,18 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home/Home";
-import Test from "./pages/Test/Test";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import Projects from "./pages/Projects/Projects.js";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Profile from "./pages/Profile/Profile";
+import SingleProject from "./pages/Projects/SingleProject";
 
-function App() {
+const App = () => {
+  const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
   return (
     <>
       <Router>
@@ -20,12 +29,28 @@ function App() {
           pauseOnHover={false}
         />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/test" element={<Test />} />
+          <Route element={<ProtectedRoute adminToken={userToken} />}>
+            <Route
+              path="/projects"
+              element={<Dashboard AnotherComponent={<Projects />} />}
+            />
+            <Route
+              path="/projects/single-project/:id"
+              element={<Dashboard AnotherComponent={<SingleProject />} />}
+            />
+            <Route
+              path="/user/profile"
+              element={<Dashboard AnotherComponent={<Profile />} />}
+            />
+          </Route>
+          <Route path="/" element={<Dashboard AnotherComponent={<Home />} />} />
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/register" element={<Register />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>
     </>
   );
-}
+};
 
 export default App;
