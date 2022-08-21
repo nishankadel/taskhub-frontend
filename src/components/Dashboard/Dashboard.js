@@ -13,6 +13,7 @@ const Dashboard = ({ AnotherComponent }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("TH:user-token");
+    localStorage.removeItem("TH:user-profile");
     toast.success("You have been logged out successfully.");
     navigate("/auth/login");
   };

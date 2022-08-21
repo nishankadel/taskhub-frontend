@@ -16,32 +16,30 @@ const Home = () => {
   // const [id, setId] = useState("");
 
   useEffect(() => {
-    setLoading(true);
-    // if (userToken) {
-    // const { id } = parseJwt(userToken);
-    // setId(id);
-    // }
-    axios
-      .post(
-        `${baseUrl}/normal/dashboard`,
-        { id: parseJwt(userToken).id },
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`,
-          },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        setTotalProject(res.data.totalProject);
-        setPtojects(res.data.projects);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (userToken) {
+      setLoading(true);
+      axios
+        .post(
+          `${baseUrl}/normal/dashboard`,
+          { id: parseJwt(userToken).id },
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          setTotalProject(res.data.totalProject);
+          setPtojects(res.data.projects);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }, [userToken]);
 
   console.log(projects);
