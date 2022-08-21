@@ -45,7 +45,7 @@ const Home = () => {
   }, [userToken]);
 
   console.log(projects);
-  // console.log(id);
+  // console.log(id);id
   return (
     <>
       {loading && <Spinner />}
