@@ -8,7 +8,6 @@ import "./CollaboratorList.css";
 
 const CollaboratorList = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
-  const userProfile = JSON.parse(localStorage.getItem("TH:user-profile"));
   const [collaborators, setCollaborators] = useState([]);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
@@ -70,17 +69,17 @@ console.log(collaborators);
         </button>
         <div className="dropdown-content">
           <div className="flex justify-between mb-2 mt-2 mr-2">
-            <a>Name</a>
-            <a>Email</a>
-            <a>Action</a>
+            <p>Name</p>
+            <p>Email</p>
+            <p>Action</p>
           </div>
           {collaborators.map((collaborator) => (
             <div
               key={collaborator._id}
               className="flex justify-between mb-2 mt-2 mr-2"
             >
-              <a>{collaborator.userId.fullName}</a>
-              <a>{collaborator.userId.email}</a>
+              <p>{collaborator.userId.fullName}</p>
+              <p>{collaborator.userId.email}</p>
               <button
                 className="bg-[#EC5252] text-gray-200 hover:bg-red-600 hover:text-white
                           px-3 py-2 rounded-sm text-sm font-medium ml-5 hover:cursor-pointer"
