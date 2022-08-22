@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/taskhub.png";
 import Spinner from "../../components/Spinner/Spinner";
@@ -70,7 +70,7 @@ const EmailVerification = () => {
               name="otp"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
-              placeholder="Email Address"
+              placeholder="Enter 4 digits OTP"
               className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
               required
             />
