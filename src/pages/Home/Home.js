@@ -33,7 +33,6 @@ const Home = () => {
           }
         )
         .then((res) => {
-          console.log(res.data);
           setTotalProject(res.data.totalProject);
           setYourProject(res.data.yourProject);
           setYourProjects(res.data.yourProjects);

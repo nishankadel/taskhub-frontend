@@ -41,6 +41,7 @@ const Register = () => {
           password,
         })
         .then((res) => {
+          console.log(res.data);
           if (res.data.success === true) {
             toast.success(res.data.message);
 
@@ -48,7 +49,6 @@ const Register = () => {
               "TH:user-profile",
               JSON.stringify(res.data.user)
             );
-
             navigate("/auth/email-verification");
           } else {
             toast.error(res.data.message);
@@ -57,6 +57,8 @@ const Register = () => {
         })
         .catch((err) => {
           console.log(err);
+          toast.error(err.response.data.message);
+          navigate("/auth/register");
         })
         .finally(() => {
           setLoading(false);
