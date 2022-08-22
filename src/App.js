@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Profile from "./pages/Profile/Profile";
 import SingleProject from "./pages/Projects/SingleProject";
 import EmailVerification from "./pages/EmailVerification/EmailVerification";
+import ProjectLog from "./pages/Projects/ProjectLog";
 
 const App = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
@@ -34,6 +35,10 @@ const App = () => {
             <Route
               path="/projects"
               element={<Dashboard AnotherComponent={<Projects />} />}
+            />
+            <Route
+              path="/projects/report/:id"
+              element={<Dashboard AnotherComponent={<ProjectLog />} />}
             />
             <Route
               path="/projects/single-project/:id"

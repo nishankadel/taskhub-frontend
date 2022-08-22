@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import baseUrl from "../../baseUrl";
 import ConfirmAction from "../../components/ConfirmAction/ConfirmAction";
@@ -73,7 +73,19 @@ const SingleProject = () => {
                 Manage {project.projectTitle}
               </h3>
               <h3 className="text-gray-500 text-xl ml-3 mb-2 font-medium">
-                {project.projectDescription}.
+                <div className="flex flex-col">
+                  {project.projectDescription}
+                  <div className="flex -ml-3 mt-2">
+                    <Link
+                      to={`/projects/report/${project._id}`}
+                      className="bg-purple-500 text-gray-200 hover:bg-purple-600 hover:text-white
+                          px-3 py-2 rounded-md text-sm font-medium ml-5 hover:cursor-pointer"
+                      type="button"
+                    >
+                      View Project Log
+                    </Link>
+                  </div>
+                </div>
               </h3>
             </div>
             <div>
