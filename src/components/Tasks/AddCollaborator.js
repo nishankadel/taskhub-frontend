@@ -32,6 +32,10 @@ const AddCollaborator = () => {
           toast.success(res.data.message);
           navigate(`/projects/single-project/${id}`);
           window.location.reload();
+        } else {
+          toast.error(res.data.message);
+          navigate(`/projects/single-project/${id}`);
+          window.location.reload();
         }
       })
       .catch((err) => {
