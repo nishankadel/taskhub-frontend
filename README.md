@@ -1,6 +1,6 @@
 # Simple task management system (Taskhub)
 
-Deployed link of [TaskHub](taskhub-client.netlify.app).
+Deployed link of TaskHub : https://taskhub-client.netlify.app/
 
 ## Features
 
