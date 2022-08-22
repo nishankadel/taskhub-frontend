@@ -8,7 +8,7 @@ import ConfirmAction from "../ConfirmAction/ConfirmAction";
 import EditTask from "../EditTask/EditTask";
 import Spinner from "../Spinner/Spinner";
 
-const Tasks = ({ project }) => {
+const Tasks = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
   const [loading, setLoading] = useState(false);
   const [projectTasks, setProjectTasks] = useState([]);

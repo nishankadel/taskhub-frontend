@@ -6,11 +6,14 @@ import baseUrl from "../../baseUrl";
 import ConfirmAction from "../../components/ConfirmAction/ConfirmAction";
 import EditProject from "../../components/EditProject/EditProject";
 import Spinner from "../../components/Spinner/Spinner";
+import AddCollaborator from "../../components/Tasks/AddCollaborator";
 import AddTask from "../../components/Tasks/AddTask";
+import CollaboratorList from "../../components/Tasks/CollaboratorList";
 import Tasks from "../../components/Tasks/Tasks";
 
 const SingleProject = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
+  const userProfile = JSON.parse(localStorage.getItem("TH:user-profile"));
 
   const [project, setProject] = useState({});
   const [loading, setLoading] = useState(false);
@@ -74,13 +77,17 @@ const SingleProject = () => {
               </h3>
             </div>
             <div>
-              <EditProject project={project} />
-              <ConfirmAction
-                btnText={<i className="fa-solid fa-trash"></i>}
-                fn={() => {
-                  handleDelete(project._id);
-                }}
-              />
+              {project.userId === userProfile._id && (
+                <div>
+                  <EditProject project={project} />
+                  <ConfirmAction
+                    btnText={<i className="fa-solid fa-trash"></i>}
+                    fn={() => {
+                      handleDelete(project._id);
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <hr />
@@ -88,7 +95,15 @@ const SingleProject = () => {
             <h1 className="text-xl ml-6 mb-3 font-bold">
               {project.projectTitle} Tasks
             </h1>
-            <AddTask />
+            <div className="flex justify-between">
+              <AddTask />
+              {project.userId === userProfile._id && (
+                <div>
+                  <AddCollaborator />
+                  <CollaboratorList />
+                </div>
+              )}
+            </div>
             <hr />
             <Tasks project={project} />
           </div>

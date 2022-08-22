@@ -11,7 +11,11 @@ const Home = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
   const navigate = useNavigate();
   const [totalProject, setTotalProject] = useState(0);
+  const [yourProject, setYourProject] = useState(0);
+  const [collaborationProject, setCollaborationProject] = useState(0);
   const [projects, setPtojects] = useState([]);
+  const [yourProjects, setYourProjects] = useState([]);
+  const [collaborationProjects, setCollaborationProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   // const [id, setId] = useState("");
 
@@ -31,6 +35,10 @@ const Home = () => {
         .then((res) => {
           console.log(res.data);
           setTotalProject(res.data.totalProject);
+          setYourProject(res.data.yourProject);
+          setYourProjects(res.data.yourProjects);
+          setCollaborationProject(res.data.collaborationProject);
+          setCollaborationProjects(res.data.collaborationProjects);
           setPtojects(res.data.projects);
         })
         .catch((err) => {
@@ -42,8 +50,6 @@ const Home = () => {
     }
   }, [userToken]);
 
-  console.log(projects);
-  // console.log(id);id
   return (
     <>
       {loading && <Spinner />}
@@ -104,33 +110,37 @@ const Home = () => {
                 <div className="w-full mt-6 mb-10 px-7 sm:w-1/2 xl:w-1/3 xl:mt-0">
                   <div className="flex items-center px-5 py-6 shadow-sm rounded-md  bg-green-500">
                     <div className="p-3">
-                      <i className="fa-solid fa-check h-8 w-8 text-white text-3xl"></i>
+                      <i className="fa-solid fa-diagram-project h-8 w-8 text-white text-3xl"></i>
                     </div>
 
                     <div className="mx-5">
-                      <h4 className="text-2xl font-semibold text-white">4</h4>
-                      <div className="text-white">Exam Completed</div>
+                      <h4 className="text-2xl font-semibold text-white">
+                        {" "}
+                        {yourProject}
+                      </h4>
+                      <div className="text-white">Your Projects</div>
                     </div>
                   </div>
                 </div>
                 <div className="w-full mt-6 px-6 mb-10 sm:w-1/2 xl:w-1/3 sm:mt-0">
                   <div className="flex items-center px-5 py-6 shadow-sm rounded-md  bg-orange-500">
                     <div className="p-3">
-                      <i className="fa-solid fa-calendar h-8 w-8 text-white text-3xl"></i>
+                      <i className="fa-solid fa-people-group h-8 w-8 text-white text-3xl"></i>
                     </div>
 
                     <div className="mx-5">
-                      <h4 className="text-2xl font-semibold text-white">4</h4>
-                      <div className="text-white">On-Going Exams</div>
+                      <h4 className="text-2xl font-semibold text-white">
+                        {collaborationProject}
+                      </h4>
+                      <div className="text-white">Collaboration Projects</div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
             <div className="mt-3">
               <h3 className="text-gray-700 text-3xl font-bold">
-                Recent Projects
+                All Recent Projects
               </h3>
               <hr />
 
@@ -139,6 +149,84 @@ const Home = () => {
               ) : (
                 <div className="flex flex-wrap items-center">
                   {projects.map((project) => (
+                    <div
+                      key={project._id}
+                      className="flex flex-col gap-4 items-center justify-center ml-7 mr-7 mb-7  bg-white"
+                    >
+                      <Link
+                        to={`/projects/single-project/${project._id}`}
+                        className=" border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-300"
+                      >
+                        <div className="grid grid-cols-6 p-5 gap-y-2">
+                          <div className="col-span-5 md:col-span-4 ml-4">
+                            <p className="text-gray-600 font-bold">
+                              {project.projectTitle}
+                            </p>
+
+                            <p className="text-gray-400">
+                              {project.projectDescription.substring(0, 19)} ....
+                            </p>
+
+                            <p className="text-gray-400">
+                              {moment(project.createdAt).format("MMMM Do YYYY")}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>{" "}
+            <div className="mt-3">
+              <h3 className="text-gray-700 text-3xl font-bold">My Projects</h3>
+              <hr />
+
+              {yourProjects.length <= 0 ? (
+                <EmptyData message="Oops! No data found." />
+              ) : (
+                <div className="flex flex-wrap items-center">
+                  {yourProjects.map((project) => (
+                    <div
+                      key={project._id}
+                      className="flex flex-col gap-4 items-center justify-center ml-7 mr-7 mb-7  bg-white"
+                    >
+                      <Link
+                        to={`/projects/single-project/${project._id}`}
+                        className=" border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-300"
+                      >
+                        <div className="grid grid-cols-6 p-5 gap-y-2">
+                          <div className="col-span-5 md:col-span-4 ml-4">
+                            <p className="text-gray-600 font-bold">
+                              {project.projectTitle}
+                            </p>
+
+                            <p className="text-gray-400">
+                              {project.projectDescription.substring(0, 19)} ....
+                            </p>
+
+                            <p className="text-gray-400">
+                              {moment(project.createdAt).format("MMMM Do YYYY")}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="mt-3">
+              <h3 className="text-gray-700 text-3xl font-bold">
+                Collaboration Projects
+              </h3>
+              <hr />
+
+              {collaborationProjects.length <= 0 ? (
+                <EmptyData message="Oops! No data found." />
+              ) : (
+                <div className="flex flex-wrap items-center">
+                  {collaborationProjects.map((project) => (
                     <div
                       key={project._id}
                       className="flex flex-col gap-4 items-center justify-center ml-7 mr-7 mb-7  bg-white"

@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 const ListProjects = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
+  const userProfile = JSON.parse(localStorage.getItem("TH:user-profile"));
   const [projects, setProjects] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
@@ -31,7 +32,7 @@ const ListProjects = () => {
         setLoading(false);
       });
   }, [userToken, id]);
-  
+
   if (userToken === null) {
     toast.error("You are not authorized to access this page.");
     return <Navigate to={"/auth/login"} />;
@@ -54,10 +55,20 @@ const ListProjects = () => {
               >
                 <div className="grid grid-cols-6 p-5 gap-y-2">
                   <div className="col-span-5 md:col-span-4 ml-4">
-                    <p className="text-gray-600 font-bold">
-                      {project.projectTitle}
-                    </p>
-
+                    <div className="flex">
+                      <p className="text-gray-600 font-bold mr-2">
+                        {project.projectTitle}
+                      </p>
+                      {project.userId === userProfile._id ? (
+                        <button className="bg-indigo-700 text-white font-bold text-sm px-1 py-1 rounded shadow  mb-1">
+                          Owner
+                        </button>
+                      ) : (
+                        <button className="bg-indigo-500 text-white font-bold text-sm px-1 py-1 rounded shadow  mb-1">
+                          Collab
+                        </button>
+                      )}
+                    </div>
                     <p className="text-gray-400">
                       {project.projectDescription.substring(0, 19)} ....
                     </p>
