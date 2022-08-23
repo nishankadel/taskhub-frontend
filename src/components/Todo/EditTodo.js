@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import baseUrl from "../../baseUrl";
 import Spinner from "../Spinner/Spinner";
@@ -14,8 +14,6 @@ const EditTodo = ({ todo, listedTodoId }) => {
 
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const { id } = useParams();
 
   useEffect(() => {
     setTodoTitle(todo.todoTitle);

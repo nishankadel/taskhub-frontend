@@ -1,7 +1,6 @@
 import EditTodo from "./EditTodo";
 import axios from "axios";
 import React, { useEffect } from "react";
-import { Link, Navigate } from "react-router-dom";
 import baseUrl from "../../baseUrl";
 import { parseJwt } from "../../utils/parseJwt";
 import Spinner from "../Spinner/Spinner";
@@ -65,11 +64,12 @@ const ListTodo = () => {
         setLoading(false);
       });
   };
+  console.log(todosList);
   return (
     <>
       {loading && <Spinner />}
       <div className="main flex flex-col m-5">
-        {!todos ? (
+        {todosList.length <= 0 ? (
           <EmptyData message="Oops! No todos found!" />
         ) : (
           todosList.map((todo) => (
