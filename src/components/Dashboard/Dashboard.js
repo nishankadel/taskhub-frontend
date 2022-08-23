@@ -54,6 +54,12 @@ const Dashboard = ({ AnotherComponent }) => {
                       <span className="font-semibold">Projects</span>
                     </li>
                   </Link>
+                  <Link to="/to-do">
+                    <li className="flex space-x-2 mt-6 cursor-pointer text-gray-200 hover:text-[#EC5252] duration-150">
+                      <i className="fa-solid fa-bars"></i>
+                      <span className="font-semibold">To-Do</span>
+                    </li>
+                  </Link>
                 </div>
               )}
             </ul>
