@@ -20,7 +20,7 @@ const Todo = () => {
           <CreateTodo />
           <hr />
           <div className="mt-3">
-            <h1 className="text-xl ml-6 mb-3 font-bold">Your Todo List</h1>updated
+            <h1 className="text-xl ml-6 mb-3 font-bold">Your Todo List</h1>
             <ListTodo />
           </div>
 
