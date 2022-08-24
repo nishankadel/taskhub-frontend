@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import CreateProjects from "../../components/CreateProjects/CreateProjects";
 import ListProjects from "../../components/ListProjects/ListProjects";
+import SearchBar from "../../components/SearchBar/SearchBar";
+
 const Projects = () => {
   const userToken = JSON.parse(localStorage.getItem("TH:user-token"));
   if (userToken === null) {
@@ -12,6 +14,7 @@ const Projects = () => {
   return (
     <>
       <main className=" container flex-1 overflow-x-hidden overflow-y-auto">
+        <SearchBar />
         <div className="container mx-auto px-6 py-3">
           <h3 className="text-gray-700 text-3xl mb-2 font-bold">
             Manage Projects
@@ -23,7 +26,6 @@ const Projects = () => {
 
             <ListProjects />
           </div>
-
           <div className="mt-8"></div>
         </div>
       </main>
